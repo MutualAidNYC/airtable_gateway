@@ -1,0 +1,23 @@
+{
+  "name": "airtablegateway",
+  "version": "1.0.0",
+  "description": "MANYC Airtable Gateway",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mutualaidnyc/airtable_gateway.git"
+  },
+  "author": "MANYC",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mutualaidnyc/airtable_gateway/issues"
+  },
+  "homepage": "https://github.com/mutualaidnyc/airtable_gateway#readme"
+}
