@@ -1,0 +1,28 @@
+{
+    "name": "airtable_gateway",
+    "version": "1.0.0",
+    "description": "MANYC Airtable Gateway",
+    "main": "index.js",
+    "dependencies": {
+        "express": "^4.17.1"
+    },
+    "devDependencies": {
+        "eslint": "^6.8.0",
+        "eslint-config-google": "^0.14.0"
+    },
+    "scripts": {
+        "start": "node index.js",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "lint": "eslint ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mutualaidnyc/airtable_gateway.git"
+    },
+    "author": "MANYC",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/mutualaidnyc/airtable_gateway/issues"
+    },
+    "homepage": "https://github.com/mutualaidnyc/airtable_gateway#readme"
+}
