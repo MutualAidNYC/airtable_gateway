@@ -1,4 +1,4 @@
-# Contributions
+# Contributing
 When contributing to this repository, please first discuss the change you wish to make via issue, slack (*#digital-tech*), or any other method with the members of the Mutual Aid NYC digital-tech group before making a change. 
 
 ## Pull Request Process
