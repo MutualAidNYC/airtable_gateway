@@ -19,4 +19,4 @@ The second configuration stage is for more custom information, and will be able 
     TODO: Add Form Example / Usage
 
 ## Contributions
-If you want to help with your own contribututions to this project, please get started at our Contributions Doc [here](https://github.com/MutualAidNYC/airtable_gateway/blob/master/CONTRIBUTIONS.md)!
+If you want to help with your own contribututions to this project, please get started at our Contributions Doc [here](https://github.com/MutualAidNYC/airtable_gateway/blob/master/CONTRIBUTING.md)!
