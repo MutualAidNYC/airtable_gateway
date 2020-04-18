@@ -18,123 +18,109 @@
     <div class="container">
         <h1>Welcome to MANYC Airtable-Gateway</h1>
         <h5>Please enter in your group's Airtable Columns that can correlate with our columns show below...</h5>
-        <form class="form-horizontal" action="api/setMapping" method="POST">
+        <form class="form-horizontal" action="/api/setMapping" method="POST">
             <div class="form-group">
                 <label class="control-label col-sm-2" for="status">Status:</label>
                 <div class="col-sm-10">
-                    <input name= "status" type="status" class="form-control" id="status" placeholder="Enter Your Status Column"
-                        name="status" value="">
+                    <input class="form-control" id="status" placeholder="Enter Your Status Column" name="status">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-2" for="id">Id:</label>
                 <div class="col-sm-10">
-                    <input type="id" class="form-control" id="id" placeholder="Enter Your Id Column" name="id">
+                    <input class="form-control" id="id" placeholder="Enter Your Id Column" name="id">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-2" for="supportType">Support Type:</label>
                 <div class="col-sm-10">
-                    <input type="supportType" class="form-control" id="supportType"
-                        placeholder="Enter Your Support Type Column" name="supportType">
+                    <input class="form-control" id="supportType" placeholder="Enter Your Support Type Column" name="supportType">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-2" for="otherSupport">Other Support:</label>
                 <div class="col-sm-10">
-                    <input type="otherSupport" class="form-control" id="otherSupport"
-                        placeholder="Enter Your Other Support Column" name="otherSupport">
+                    <input class="form-control" id="otherSupport" placeholder="Enter Your Other Support Column" name="otherSupport">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-2" for="community">Community:</label>
                 <div class="col-sm-10">
-                    <input type="community" class="form-control" id="community"
-                        placeholder="Enter Your Community Column" name="community">
+                    <input class="form-control" id="community" placeholder="Enter Your Community Column" name="community">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-2" for="language">Language:</label>
                 <div class="col-sm-10">
-                    <input type="language" class="form-control" id="language" placeholder="Enter Your Language Column"
-                        name="language">
+                    <input class="form-control" id="language" placeholder="Enter Your Language Column" name="language">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-2" for="languageOther">Language Other:</label>
                 <div class="col-sm-10">
-                    <input type="languageOther" class="form-control" id="languageOther"
-                        placeholder="Enter Your Language Other Column" name="languageOther">
+                    <input class="form-control" id="languageOther" placeholder="Enter Your Language Other Column" name="languageOther">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-2" for="phone">Phone:</label>
                 <div class="col-sm-10">
-                    <input type="phone" class="form-control" id="phone" placeholder="Enter Your Phone Column"
-                        name="phone">
+                    <input class="form-control" id="phone" placeholder="Enter Your Phone Column" name="phone">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Email:</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" id="email" placeholder="Enter Your Email Column"
-                        name="email">
+                    <input class="form-control" id="email" placeholder="Enter Your Email Column" name="email">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-2" for="fullName">Full Name:</label>
                 <div class="col-sm-10">
-                    <input type="fullName" class="form-control" id="fullName" placeholder="Enter Your Full Name Column"
-                        name="fullName">
+                    <input class="form-control" id="fullName" placeholder="Enter Your Full Name Column" name="fullName">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-2" for="urgency">Urgency:</label>
                 <div class="col-sm-10">
-                    <input type="urgency" class="form-control" id="urgency" placeholder="Enter Your Urgency Column"
-                        name="urgency">
+                    <input class="form-control" id="urgency" placeholder="Enter Your Urgency Column" name="urgency">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-2" for="contactMethod">Contact Method:</label>
                 <div class="col-sm-10">
-                    <input type="contactMethod" class="form-control" id="contactMethod"
-                        placeholder="Enter Your Contact Method Column" name="contactMethod">
+                    <input class="form-control" id="contactMethod" placeholder="Enter Your Contact Method Column" name="contactMethod">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-2" for="crossStreet">Cross Street:</label>
                 <div class="col-sm-10">
-                    <input type="crossStreet" class="form-control" id="crossStreet"
-                        placeholder="Enter Your Cross Street Column" name="crossStreet">
+                    <input class="form-control" id="crossStreet" placeholder="Enter Your Cross Street Column" name="crossStreet">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-2" for="timestampCreated">Timestamp Created:</label>
                 <div class="col-sm-10">
-                    <input type="timestampCreated" class="form-control" id="timestampCreated"
-                        placeholder="Enter Your Timestamp Created Column" name="timestampCreated">
+                    <input class="form-control" id="timestampCreated" placeholder="Enter Your Timestamp Created Column" name="timestampCreated">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-2" for="timestampSent">Timestamp Sent :</label>
                 <div class="col-sm-10">
-                    <input type="timestampSent" class="form-control" id="timestampSent"
-                        placeholder="Enter Your Timestamp Sent Column" name="timestampSent">
+                    <input class="form-control" id="timestampSent" placeholder="Enter Your Timestamp Sent Column" name="timestampSent">
                 </div>
             </div>
 
