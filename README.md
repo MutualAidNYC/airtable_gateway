@@ -16,12 +16,13 @@ The first configuration stage occurs before deployment on Heroku. The client gro
 
 The second configuration stage is for more custom information, and will be able to be entered through forms hosted directly on the application. If you visit the deployed heroku endpoint, it will direct to a form that will create a POST to enter the client mapping data into the application.
 
-    TODO: Add Form Example / Usage
+![alt text](images/form_example.png "Client Setup Form")
 
 ### Stage 2 - Airtable Polling
-With the client setup with their own environment variables + column mapping, we can then poll their needs request table for updates using the airtable change detector package from crown heights mutual aid (TODO add link). 
+With the client setup with their own environment variables + column mapping, we can then poll their needs request table for updates using the [airtable-change-detector](https://github.com/crownheightsaid/airtable-change-detector) package from [Crown Heights Mutual Aid](https://github.com/crownheightsaid). Please see example usage [here](https://github.com/crownheightsaid/airtable-change-detector/blob/master/README.md). 
 
 When the airtable is polled and changed records are detected, we should make a POST request to the MANYC integromat webhook (setup for that is TBD). 
+
 
 ### Stage 3 - Receiving Upstream Airtable Changes
 Additionally we want to be able to send back changes to the client Airtable from the larger MANYC Airtable. The flow for this would be MANYC sending a POST request through Integromat to a REST endpoint setup on the gateway. This REST endpoint will then update / insert the row received using the Airtable API. 
