@@ -28,5 +28,5 @@ When the airtable is polled and changed records are detected, we should make a P
 Additionally we want to be able to send back changes to the client Airtable from the larger MANYC Airtable. The flow for this would be MANYC sending a POST request through Integromat to a REST endpoint setup on the gateway. This REST endpoint will then update / insert the row received using the Airtable API. 
 
 
-## Contributions
-If you want to help with your own contribututions to this project, please get started at our Contributions Doc [here](https://github.com/MutualAidNYC/airtable_gateway/blob/master/CONTRIBUTING.md)!
+## Contributing
+If you want to help with your own contributions to this project, please get started at our Contributions Doc [here](CONTRIBUTING.md)!
