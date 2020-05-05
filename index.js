@@ -11,27 +11,28 @@ app.listen(port, () => {
   console.log('MANYC Airtable-Gateway Server running on port ' + port);
 });
 
-/* Client Mapping Form */
+/* Client Column Mapping Form */
 app.get('/', (req, res, next) => {
   res.sendFile(path.join(__dirname + '/mapping_form.html'));
 });
 
-/* Client Mapping API */
-let clientMapping = {};
+// Client New Needs Request to MANYC Object
+let clientColumnMapping = {};
 
-app.get('/api/getMapping', (req, res, next) => {
-  res.send(JSON.stringify(clientMapping));
+app.get('/api/getColumnMapping', (req, res, next) => {
+  res.send(JSON.stringify(clientColumnMapping));
 });
 
-app.post('/api/setMapping', function(req, res) {
-  clientMapping = {
-    status: req.body.status,
-    id: req.body.id,
+app.post('/api/setColumnMapping', function(req, res) {
+  clientColumnMapping = {
     supportType: req.body.supportType,
     otherSupport: req.body.otherSupport,
     community: req.body.community,
     language: req.body.language,
     languageOther: req.body.languageOther,
+    region: req.body.region,
+    neighborhood: req.body.neighborhood,
+    zip: req.body.zip,
     phone: req.body.phone,
     email: req.body.email,
     fullName: req.body.fullName,
@@ -39,12 +40,15 @@ app.post('/api/setMapping', function(req, res) {
     contactMethod: req.body.contactMethod,
     crossStreet: req.body.crossStreet,
     timestampCreated: req.body.timestampCreated,
-    timestampSent: req.body.timestampSent,
+    source: req.body.source,
+    sourceID: req.body.sourceID,
+    notes: req.body.notes,
   };
   console.log(clientMapping);
   res.send('MANYC Airtable-Gateway Client Mapping Set');
 });
 
+// MANYC Sends to Group Object
 app.post('/api/createRequest', function(req, res) {
   newRequest = {
     status: req.body.status,
@@ -62,20 +66,25 @@ app.post('/api/createRequest', function(req, res) {
     crossStreet: req.body.crossStreet,
     timestampCreated: req.body.timestampCreated,
     timestampSent: req.body.timestampSent,
+    source: req.body.source,
+    sourceID: req.body.sourceID,
   };
   console.log(newRequest);
-  res.send('MANYC Airtable-Gateway Client Mapping Set');
+  // TODO Create new request with Airtable API
+  res.send('MANYC Airtable-Gateway Needs Request Created');
 });
-
 
 /* ----------------------------------------------------------------*/
 /* Airtable Polling Section */
 /* ----------------------------------------------------------------*/
-
 // Config variables set via heroku
-const HEROKU_AIR_KEY = '';
-const HEROKU_AIR_BASE_ID = '';
-const HEROKU_TABLE_NAME = 'Individual Needs Requests';
+const HEROKU_AIR_KEY = process.env.AIRTABLE_KEY;
+const HEROKU_AIR_BASE_ID = process.env.AIRTABLE_BASE;
+const HEROKU_TABLE_NAME = process.env.AIRTABLE_TABLE_NAME;
+
+const MANYC_NEW_REQ_URL = process.env.MANYC_NEW_REQ;
+const MANYC_UPDATE_REQ_URL = process.env.MANYC_UPDATE_REQ;
+const MANYC_DELETE_REQ_URL = process.env.MANYC_DELETE_REQ;
 
 const axios = require('axios');
 const Airtable = require('airtable');
@@ -95,12 +104,12 @@ airtableGatewayDetector.pollWithInterval(
   'pollingNameForLogging',
   10000, // interval in milliseconds
   async (recordsChanged) => {
-    const numChanges = records.Changed.length;
+    const numChanges = recordsChanged.length;
     console.info(`Found ${numChanges} changes in ` + HEROKU_TABLE_NAME);
     const promises = [];
     recordsChanged.forEach((record) => {
       console.log(record.fields);
-      promises.push(axios.post('http://localhost:8001/api/createRequest', {
+      promises.push(axios.post(MANYC_NEW_REQ_URL, {
         // TODO Create Request Body
       }));
     });
