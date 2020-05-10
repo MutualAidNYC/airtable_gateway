@@ -18,7 +18,7 @@
     <div class="container">
         <h1>Welcome to MANYC Airtable-Gateway</h1>
         <h5>Please enter in your group's Airtable Columns that can correlate with our columns show below...</h5>
-        <form class="form-horizontal" action="/api/setMapping" method="POST">
+        <form class="form-horizontal" action="/api/setColumnMapping" method="POST">
             <div class="form-group">
                 <label class="control-label col-sm-2" for="status">Status:</label>
                 <div class="col-sm-10">
@@ -118,9 +118,23 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label col-sm-2" for="timestampSent">Timestamp Sent :</label>
+                <label class="control-label col-sm-2" for="timestampSent">Timestamp Sent:</label>
                 <div class="col-sm-10">
                     <input class="form-control" id="timestampSent" placeholder="Enter Your Timestamp Sent Column" name="timestampSent">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="">Source:</label>
+                <div class="col-sm-10">
+                    <input class="form-control" id="source" placeholder="Enter Your Source Column" name="source">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="">Source ID:</label>
+                <div class="col-sm-10">
+                    <input class="form-control" id="sourceID" placeholder="Enter Your Source ID Column" name="sourceID">
                 </div>
             </div>
 
