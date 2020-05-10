@@ -8,14 +8,14 @@ const deepFreeze = (object) => {
   // Retrieve the property names defined on object
   const propNames = Object.getOwnPropertyNames(object);
   // Freeze properties before freezing self
-  for (let name of propNames) {
-    let value = object[name];
-    if (value && typeof value === "object") {
+  for (const name of propNames) {
+    const value = object[name];
+    if (value && typeof value === 'object') {
       deepFreeze(value);
     }
   }
   return Object.freeze(object);
-}
+};
 
 const config = {
   airtable: {
@@ -26,10 +26,10 @@ const config = {
   url: {
     newReq: process.env.MANYC_NEW_REQ,
     updateReq: process.env.MANYC_UPDATE_REQ,
-    deleteReq: process.env.MANYC_DELETE_REQ_URL
+    deleteReq: process.env.MANYC_DELETE_REQ_URL,
   },
   port: process.env.PORT,
-}
+};
 
 // config values should never ever be mutated, lets make sure!
 module.exports = deepFreeze(config);
