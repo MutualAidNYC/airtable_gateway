@@ -1,11 +1,6 @@
 // Config variables set via heroku
-const HEROKU_AIR_KEY = process.env.AIRTABLE_KEY;
-const HEROKU_AIR_BASE_ID = process.env.AIRTABLE_BASE;
-const HEROKU_TABLE_NAME = process.env.AIRTABLE_TABLE_NAME;
 const MANYC_NEW_REQ_URL = process.env.MANYC_NEW_REQ;
-const MANYC_UPDATE_REQ_URL = process.env.MANYC_UPDATE_REQ;
-const MANYC_DELETE_REQ_URL = process.env.MANYC_DELETE_REQ;
-
+const config = require('./src/config')
 const path = require('path');
 const express = require('express');
 const axios = require('axios');
@@ -86,18 +81,24 @@ app.post('/api/createRequest', function (req, res) {
     }
   };
   console.log(newRequest);
-  AirtableHelper(HEROKU_AIR_KEY, HEROKU_AIR_BASE_ID, HEROKU_TABLE_NAME, [newRequest]);
+  AirtableHelper(
+    config.airtable.key,
+    config.airtable.baseId,
+    config.airtable.tableName,
+    [newRequest]
+  );
   res.send('MANYC Airtable-Gateway Needs Request Created');
 });
 
 /* ----------------------------------------------------------------*/
 /* Airtable Polling Section */
 /* ----------------------------------------------------------------*/
-const base = new Airtable({ apiKey: HEROKU_AIR_KEY }).base(HEROKU_AIR_BASE_ID);
+const base = new Airtable({ apiKey: config.airtable.key })
+  .base(config.airtable.baseId);
 const ChangeDetector = require('airtable-change-detector');
 
 const airtableGatewayDetector = new ChangeDetector(
-  base(HEROKU_TABLE_NAME), {
+  base(config.airtable.tableName), {
   writeDelayMs: 100,
   metaFieldName: 'Meta', // Defaults to `Meta`
   lastModifiedFieldName: 'Last Modified', // Defaults to `Last Modified`
@@ -110,11 +111,11 @@ airtableGatewayDetector.pollWithInterval(
   10000, // interval in milliseconds
   async (recordsChanged) => {
     const numChanges = recordsChanged.length;
-    console.info(`Found ${numChanges} changes in ` + HEROKU_TABLE_NAME);
+    console.info(`Found ${numChanges} changes in ` + config.airtable.tableName);
     const promises = [];
     recordsChanged.forEach((record) => {
       console.log(record.fields);
-      promises.push(axios.post(MANYC_NEW_REQ_URL, {
+      promises.push(axios.post(config.url.newReq, {
         // TODO Create Request Body
       }));
     });
