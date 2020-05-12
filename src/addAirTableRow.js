@@ -10,8 +10,8 @@ const defaultMap = {
   status: 'Status',
   id: 'Unique ID',
   supportType: 'What type(s) of support are you seeking?',
-  // otherSupport: "",
-  // community: [],
+  otherSupport: 'If you\'re seeking other types of support, please describe.',
+  community: 'Are you, or anyone in your household in one or more of these hardest-hit groups? Please select all that apply.', // eslint-disable-line max-len
   language:
     'Language Access: is your primary language something other than English, for which you\'d need translation & interpretation support to connect to volunteers?', // eslint-disable-line max-len
   languageOther: 'Other language(s) spoken:',
@@ -19,10 +19,10 @@ const defaultMap = {
   email: 'Email',
   fullName: 'Full Name',
   urgency: 'How soon do you need support?',
-  // contactMethod: [],
+  contactMethod: 'Which of these ways are best to get in touch with you?',
   crossStreet: 'Cross Streets',
   // timestampCreated: "",
-  // timestampSent: "",
+  timestampSent: 'Dispatched Time',
   // source: "",
   // sourceID: "",
 };
