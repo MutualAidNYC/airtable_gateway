@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 module.exports = (app) => {
   app.get('/getColumnMapping', (_req, res) => {
@@ -8,4 +8,4 @@ module.exports = (app) => {
     res.send('Column Mapping not set yet ...');
     // }
   });
-}
+};

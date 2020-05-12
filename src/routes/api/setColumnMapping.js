@@ -1,7 +1,7 @@
-'use strict'
+'use strict';
 
 module.exports = (app) => {
-  app.post('/setColumnMapping', function (req, res) {
+  app.post('/setColumnMapping', function(req, res) {
     clientColumnMapping = {
       status: req.body.status,
       id: req.body.id,
@@ -24,4 +24,4 @@ module.exports = (app) => {
     console.log(clientMapping);
     res.send('MANYC Airtable-Gateway Client Mapping Set');
   });
-}
+};

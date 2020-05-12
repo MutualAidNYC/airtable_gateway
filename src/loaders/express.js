@@ -1,10 +1,10 @@
-'use strict'
+'use strict';
 const bodyParser = require('body-parser');
 const path = require('path');
-const routes = require('../routes')
+const routes = require('../routes');
 
 module.exports = (app) => {
-  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
 
   // default route: Client Column Mapping Form
@@ -12,6 +12,5 @@ module.exports = (app) => {
     res.sendFile(path.join(__dirname, '..', 'assets', 'mapping_form.html'));
   });
 
-  // app.use('', routes())
-  routes(app)
-}
+  routes(app);
+};
