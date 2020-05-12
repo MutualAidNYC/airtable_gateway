@@ -32,7 +32,7 @@ app.get('/api/getColumnMapping', (req, res, next) => {
   }
 });
 
-app.post('/api/setColumnMapping', function(req, res) {
+app.post('/api/setColumnMapping', function (req, res) {
   clientColumnMapping = {
     status: req.body.status,
     id: req.body.id,
@@ -57,70 +57,75 @@ app.post('/api/setColumnMapping', function(req, res) {
 });
 
 // MANYC Sends to Group Object
-app.post('/api/createRequest', function(req, res) {
-  newRequest = {
-    manyc: {
-      status: req.body.status,
-      id: req.body.id,
-      supportType: req.body.supportType,
-      otherSupport: req.body.otherSupport,
-      community: req.body.community,
-      language: req.body.language,
-      languageOther: req.body.languageOther,
-      phone: req.body.phone,
-      email: req.body.email,
-      fullName: req.body.fullName,
-      urgency: req.body.urgency,
-      contactMethod: req.body.contactMethod,
-      crossStreet: req.body.crossStreet,
-      timestampCreated: req.body.timestampCreated,
-      timestampSent: req.body.timestampSent,
-      source: req.body.source,
-      sourceID: req.body.sourceID,
-    },
-  };
+app.post('/api/createRequest', async function (req, res) {
+  const newRequest = req.body;
+  // newRequest = {
+  //   manyc: {
+  //     status: req.body.status,
+  //     id: req.body.id,
+  //     supportType: req.body.supportType,
+  //     otherSupport: req.body.otherSupport,
+  //     community: req.body.community,
+  //     language: req.body.language,
+  //     languageOther: req.body.languageOther,
+  //     phone: req.body.phone,
+  //     email: req.body.email,
+  //     fullName: req.body.fullName,
+  //     urgency: req.body.urgency,
+  //     contactMethod: req.body.contactMethod,
+  //     crossStreet: req.body.crossStreet,
+  //     timestampCreated: req.body.timestampCreated,
+  //     timestampSent: req.body.timestampSent,
+  //     source: req.body.source,
+  //     sourceID: req.body.sourceID,
+  //   },
+  // };
   console.log(newRequest);
-  airtableHelper(
+  try {
+    await airtableHelper(
       config.airtable.key,
       config.airtable.baseId,
       config.airtable.tableName,
       [newRequest],
-  );
+    );
+  } catch (error) {
+    console.log('error: ', error);
+  }
   res.send('MANYC Airtable-Gateway Needs Request Created');
 });
 
 /* ----------------------------------------------------------------*/
 /* Airtable Polling Section */
 /* ----------------------------------------------------------------*/
-const base = new Airtable({apiKey: config.airtable.key})
-    .base(config.airtable.baseId);
+const base = new Airtable({ apiKey: config.airtable.key })
+  .base(config.airtable.baseId);
 const ChangeDetector = require('airtable-change-detector');
 
 const airtableGatewayDetector = new ChangeDetector(
-    base(config.airtable.tableName), {
-      writeDelayMs: 100,
-      metaFieldName: 'Meta', // Defaults to `Meta`
-      lastModifiedFieldName: 'Last Modified', // Defaults to `Last Modified`
-      lastProcessedFieldName: 'Last Processed',
-    },
+  base(config.airtable.tableName), {
+  writeDelayMs: 100,
+  metaFieldName: 'Meta', // Defaults to `Meta`
+  lastModifiedFieldName: 'AirTable Gateway Last Modified', // Defaults to `Last Modified`
+  lastProcessedFieldName: 'Last Processed', //Defaults to 'Last Processed'
+},
 );
 
-airtableGatewayDetector.pollWithInterval(
-    'pollingNameForLogging',
-    10000, // interval in milliseconds
-    async (recordsChanged) => {
-      const numChanges = recordsChanged.length;
-      const msg = `Found ${numChanges} changes in ` + config.airtable.tableName;
-      console.info(msg);
-      const promises = [];
-      recordsChanged.forEach((record) => {
-        console.log(record.fields);
-        promises.push(axios.post(config.url.newReq, {
-        // TODO Create Request Body
-        }));
-      });
+// airtableGatewayDetector.pollWithInterval(
+//   'pollingNameForLogging',
+//   10000, // interval in milliseconds
+//   async (recordsChanged) => {
+//     const numChanges = recordsChanged.length;
+//     const msg = `Found ${numChanges} changes in ` + config.airtable.tableName;
+//     console.info(msg);
+//     const promises = [];
+//     recordsChanged.forEach((record) => {
+//       console.log(record.fields);
+//       promises.push(axios.post(config.url.newReq, {
+//         // TODO Create Request Body
+//       }));
+//     });
 
-      // If doing many Airtable writes, be careful of 5rps rate limit
-      return Promise.all(promises);
-    },
-);
+//     // If doing many Airtable writes, be careful of 5rps rate limit
+//     return Promise.all(promises);
+//   },
+// );
