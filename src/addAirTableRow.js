@@ -10,19 +10,19 @@ const defaultMap = {
   status: 'Status',
   id: 'Unique ID',
   supportType: 'What type(s) of support are you seeking?',
-  otherSupport: "If you're seeking other types of support, please describe.",
-  community: "Are you, or anyone in your household in one or more of these hardest-hit groups? Please select all that apply.",
+  otherSupport: 'If you\'re seeking other types of support, please describe.',
+  community: 'Are you, or anyone in your household in one or more of these hardest-hit groups? Please select all that apply.', // eslint-disable-line max-len
   language:
-    "Language Access: is your primary language something other than English, for which you'd need translation & interpretation support to connect to volunteers?", // eslint-disable-line max-len
+    'Language Access: is your primary language something other than English, for which you\'d need translation & interpretation support to connect to volunteers?', // eslint-disable-line max-len
   languageOther: 'Other language(s) spoken:',
   phone: 'Cell',
   email: 'Email',
   fullName: 'Full Name',
   urgency: 'How soon do you need support?',
-  contactMethod: "Which of these ways are best to get in touch with you?",
+  contactMethod: 'Which of these ways are best to get in touch with you?',
   crossStreet: 'Cross Streets',
   // timestampCreated: "",
-  timestampSent: "Dispatched Time",
+  timestampSent: 'Dispatched Time',
   // source: "",
   // sourceID: "",
 };
@@ -40,7 +40,7 @@ const transformObjects = (records, fieldToValueMap) => {
     // for every provided record
 
     // create a new default airtable object
-    const tranformedRecord = { fields: {} };
+    const tranformedRecord = {fields: {}};
 
     for (const key in fieldToValueMap) {
       // for every key in the fieldToValueMap Object
@@ -82,11 +82,11 @@ const transformObjects = (records, fieldToValueMap) => {
  *                             created
  */
 const addAirtableRows = (
-  apiKey,
-  baseId,
-  tableName,
-  records,
-  fieldValueMap = defaultMap,
+    apiKey,
+    baseId,
+    tableName,
+    records,
+    fieldValueMap = defaultMap,
 ) => {
   // throw errors if records is not an array or if the array is empty or to big
   if (!(records instanceof Array)) throw Error('records must be an Array');
