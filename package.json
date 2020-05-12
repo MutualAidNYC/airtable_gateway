@@ -19,7 +19,7 @@
         "supertest": "^4.0.2"
     },
     "scripts": {
-        "start": "node index.js",
+        "start": "node src/app.js",
         "test": "mocha --recursive",
         "lint": "eslint ."
     },
