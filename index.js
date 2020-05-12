@@ -106,26 +106,56 @@ const airtableGatewayDetector = new ChangeDetector(
   writeDelayMs: 100,
   metaFieldName: 'Meta', // Defaults to `Meta`
   lastModifiedFieldName: 'AirTable Gateway Last Modified', // Defaults to `Last Modified`
-  lastProcessedFieldName: 'Last Processed', //Defaults to 'Last Processed'
+  lastProcessedFieldName: 'Airtable Gateway Last Processed', //Defaults to 'Last Processed'
 },
 );
 
-// airtableGatewayDetector.pollWithInterval(
-//   'pollingNameForLogging',
-//   10000, // interval in milliseconds
-//   async (recordsChanged) => {
-//     const numChanges = recordsChanged.length;
-//     const msg = `Found ${numChanges} changes in ` + config.airtable.tableName;
-//     console.info(msg);
-//     const promises = [];
-//     recordsChanged.forEach((record) => {
-//       console.log(record.fields);
-//       promises.push(axios.post(config.url.newReq, {
-//         // TODO Create Request Body
-//       }));
-//     });
+airtableGatewayDetector.pollWithInterval(
+  'pollingNameForLogging',
+  10000, // interval in milliseconds
+  async (recordsChanged) => {
+    const numChanges = recordsChanged.length;
+    const msg = `Found ${numChanges} changes in ` + config.airtable.tableName;
+    console.info(msg);
+    const promises = [];
+    recordsChanged.forEach((record) => {
+      console.log(record.fields);
+      if (Object.keys(record.getMeta().lastValues).length === 0) return;
+      let status;
+      const justCantArr = [
+        "In Progress - We Can’t Take Responsibility for This Anymore",
+        "EMERGENCY- Has Urgent Needs to be filled; that we cannot!"
+      ]
+      const completedArr = [
+        "Resolved - Follow up next week",
+        "Resolved - Able to Fill Need",
+        "Resolved - Cancelled"
+      ]
+      const assignedArr = [
+        'In Progress- Unable to contact',
+        'In Progress - We Take Responsibility For This'
+      ]
+      if (justCantArr.includes(record.fields.Status)) {
+        status = 'justCant'
+      } else if (completedArr.includes(record.fields.Status)) {
+        status = 'completed'
+      } else if (assignedArr.includes(record.fields.Status)) {
+        status = 'assigned'
+      }
+      else {
+        return
+      }
+      promises.push(axios.post(config.url.newReq, {
+        manyc: {
+          status, // justCant || completed || assigned
+          id: record.fields['Unique ID'],
+          groupClaiming: record.fields['Group Claiming'] || null, // not always present
+          notes: record.fields['Note'] || null, // not always present
+        }
+      }));
+    });
 
-//     // If doing many Airtable writes, be careful of 5rps rate limit
-//     return Promise.all(promises);
-//   },
-// );
+    // If doing many Airtable writes, be careful of 5rps rate limit
+    return Promise.all(promises);
+  },
+);
