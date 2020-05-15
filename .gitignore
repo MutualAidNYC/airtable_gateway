@@ -3,3 +3,7 @@ node_modules/
 
 *.swp
 .env
+
+# nyc
+coverage/
+.nyc_output
