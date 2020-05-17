@@ -2,7 +2,7 @@
 
 module.exports = (app) => {
   app.post('/setColumnMapping', function(req, res) {
-    clientColumnMapping = {
+    const clientColumnMapping = {
       status: req.body.status,
       id: req.body.id,
       supportType: req.body.supportType,
@@ -21,7 +21,7 @@ module.exports = (app) => {
       source: req.body.source,
       sourceID: req.body.sourceID,
     };
-    console.log(clientMapping);
+    console.log(clientColumnMapping);
     res.send('MANYC Airtable-Gateway Client Mapping Set');
   });
 };

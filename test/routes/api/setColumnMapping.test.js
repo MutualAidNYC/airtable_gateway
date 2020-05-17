@@ -6,13 +6,13 @@ const app = require('express')();
 
 expressLoader(app);
 
-describe('GET /api/getColumnMapping', async () => {
+describe('GET /api/setColumnMapping', async () => {
   it('return result 200 status', async () => {
-    const res = await request(app).get('/api/getColumnMapping');
+    const res = await request(app).post('/api/setColumnMapping');
 
     expect(res.status).to.equal(200);
     expect(res.body).to.eql({});
     expect(res.type).to.equal('text/html');
-    expect(res.text).to.equal('Column Mapping not set yet ...');
+    expect(res.text).to.equal('MANYC Airtable-Gateway Client Mapping Set');
   });
 });
