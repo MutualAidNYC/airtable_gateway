@@ -7,16 +7,16 @@ const config = require('../config');
 
 class AirtablePoller {
   constructor() {
-    const base = new Airtable({apiKey: config.airtable.key})
-        .base(config.airtable.baseId);
+    const base = new Airtable({ apiKey: config.airtable.key })
+      .base(config.airtable.baseId);
 
     this.airtableGatewayDetector = new ChangeDetector(
-        base(config.airtable.tableName), {
-          writeDelayMs: 100,
-          metaFieldName: 'Meta', // Defaults to `Meta`
-          lastModifiedFieldName: 'AirTable Gateway Last Modified',
-          lastProcessedFieldName: 'Airtable Gateway Last Processed',
-        },
+      base(config.airtable.tableName), {
+      writeDelayMs: 100,
+      metaFieldName: 'Meta', // Defaults to `Meta`
+      lastModifiedFieldName: 'AirTable Gateway Last Modified',
+      lastProcessedFieldName: 'Airtable Gateway Last Processed',
+    },
     );
   }
   async processChangedRecords(recordsChanged) {
@@ -48,6 +48,7 @@ class AirtablePoller {
       } else if (assignedArr.includes(record.fields.Status)) {
         status = 'assigned';
       } else {
+        console.log('returned')
         return;
       }
       promises.push(axios.post(config.url.newReq, {
@@ -66,9 +67,9 @@ class AirtablePoller {
   }
   poll() {
     this.airtableGatewayDetector.pollWithInterval(
-        `Polling of ${config.airtable.tableName}`,
-        10000, // interval in milliseconds
-        this.processChangedRecords);
+      `Polling of ${config.airtable.tableName}`,
+      10000, // interval in milliseconds
+      this.processChangedRecords);
   }
 }
 
