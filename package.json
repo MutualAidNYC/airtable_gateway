@@ -24,6 +24,7 @@
         "start": "node src/app.js",
         "test": "mocha --recursive",
         "lint": "eslint .",
+        "lint-fix": "eslint . --fix",
         "coverage": "nyc --reporter=text --reporter=html mocha --recursive --exit --timeout 15000 && open coverage/index.html"
     },
     "repository": {

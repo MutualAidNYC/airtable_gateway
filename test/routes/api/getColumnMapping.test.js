@@ -1,6 +1,6 @@
 'use strict';
 const request = require('supertest');
-const { expect } = require('chai');
+const {expect} = require('chai');
 const expressLoader = require('../../../src/loaders/express');
 const app = require('express')();
 
