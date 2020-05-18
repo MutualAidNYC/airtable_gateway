@@ -1,0 +1,32 @@
+name: Node.js CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - run: npm install
+      - run: npm run build --if-present
+      - run: npm test
+        env:
+          CI: true
+          AIRTABLE_KEY: keyXXXXXXXXXXXXXXX
+          AIRTABLE_BASE: appXXXXXXXXXXXXXXX
+          AIRTABLE_TABLE_NAME: Individual Needs Requests
+          MANYC_NEW_REQ: https://hook.integromat.com/xxxxxxxxxxxxxxxxxxxxx
+          MANYC_UPDATE_REQ: REPLACE_ME
+          MANYC_DELETE_REQ_URL: REPLACE_ME
+          PORT: 8080
