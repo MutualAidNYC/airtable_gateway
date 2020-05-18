@@ -16,7 +16,7 @@ The first configuration stage occurs before deployment on Heroku. The client gro
 
 The second configuration stage is for more custom information, and will be able to be entered through forms hosted directly on the application. If you visit the deployed heroku endpoint, it will direct to a form that will create a POST to enter the client mapping data into the application.
 
-![alt text](images/form_example.png "Client Setup Form")
+![alt text](docs/images/form_example.png "Client Setup Form")
 
 ### Stage 2 - Airtable Polling
 With the client setup with their own environment variables + column mapping, we can then poll their needs request table for updates using the [airtable-change-detector](https://github.com/crownheightsaid/airtable-change-detector) package from [Crown Heights Mutual Aid](https://github.com/crownheightsaid). Please see example usage [here](https://github.com/crownheightsaid/airtable-change-detector/blob/master/README.md).
