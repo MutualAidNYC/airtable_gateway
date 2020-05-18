@@ -108,4 +108,4 @@ const addAirtableRows = (
   return createRecords(transformedRecords);
 };
 
-module.exports = addAirtableRows;
+module.exports = {addAirtableRows};
