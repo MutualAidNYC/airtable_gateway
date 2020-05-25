@@ -28,24 +28,11 @@ class AirtablePoller {
     recordsChanged.forEach((record) => {
       if (Object.keys(record.getMeta().lastValues).length === 0) return;
       let status;
-      const justCantArr = [
-        'In Progress - We Can’t Take Responsibility for This Anymore',
-        'EMERGENCY- Has Urgent Needs to be filled; that we cannot!',
-      ];
-      const completedArr = [
-        'Resolved - Follow up next week',
-        'Resolved - Able to Fill Need',
-        'Resolved - Cancelled',
-      ];
-      const assignedArr = [
-        'In Progress- Unable to contact',
-        'In Progress - We Take Responsibility For This',
-      ];
-      if (justCantArr.includes(record.fields.Status)) {
+      if (config.statusMap.justCantArr.includes(record.fields.Status)) {
         status = 'justCant';
-      } else if (completedArr.includes(record.fields.Status)) {
+      } else if (config.statusMap.completedArr.includes(record.fields.Status)) {
         status = 'completed';
-      } else if (assignedArr.includes(record.fields.Status)) {
+      } else if (config.statusMap.assignedArr.includes(record.fields.Status)) {
         status = 'assigned';
       } else {
         console.log('returned');

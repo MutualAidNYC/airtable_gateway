@@ -34,7 +34,28 @@ const config = {
     source: process.env.FIELD_MAP_SOURCE,
     sourceID: process.env.FIELD_MAP_SOURCE_ID,
   },
+  statusMap: {
+    justCantArr: [],
+    completedArr: [],
+    assignedArr: [],
+  },
   port: process.env.PORT,
 };
+
+// lets get up to 10 statuses for the status mapping
+for (let idx = 1; idx <= 10; idx++) {
+  const justCantVar = `STATUS_MAP_JUST_CANT_${idx}`;
+  if (process.env[justCantVar]) {
+    config.statusMap.justCantArr.push(process.env[justCantVar]);
+  }
+  const completedVar = `STATUS_MAP_COMPLETED_${idx}`;
+  if (process.env[completedVar]) {
+    config.statusMap.completedArr.push(process.env[completedVar]);
+  }
+  const assignedVar = `STATUS_MAP_ASSIGNED_${idx}`;
+  if (process.env[assignedVar]) {
+    config.statusMap.assignedArr.push(process.env[assignedVar]);
+  }
+}
 
 module.exports = config;
