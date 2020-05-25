@@ -1,31 +1,7 @@
 'use strict';
 const Airtable = require('airtable');
 const util = require('util');
-
-// The fields that I could match in the example airbase table provided to me
-// by ben:
-// I commented out fields that I couldn't match
-// https://airtable.com/tblQ17oiafuut0mpP/viwvoqxOoTFF0JsdW
-const defaultMap = {
-  status: 'Status',
-  id: 'Unique ID',
-  supportType: 'What type(s) of support are you seeking?',
-  otherSupport: 'If you\'re seeking other types of support, please describe.',
-  community: 'Are you, or anyone in your household in one or more of these hardest-hit groups? Please select all that apply.', // eslint-disable-line max-len
-  language:
-    'Language Access: is your primary language something other than English, for which you\'d need translation & interpretation support to connect to volunteers?', // eslint-disable-line max-len
-  languageOther: 'Other language(s) spoken:',
-  phone: 'Cell',
-  email: 'Email',
-  fullName: 'Full Name',
-  urgency: 'How soon do you need support?',
-  contactMethod: 'Which of these ways are best to get in touch with you?',
-  crossStreet: 'Cross Streets',
-  // timestampCreated: "",
-  timestampSent: 'Dispatched Time',
-  // source: "",
-  // sourceID: "",
-};
+const config = require('../config');
 
 /**
  * Will add 1-10 records to a specified airtable base
@@ -86,7 +62,7 @@ const addAirtableRows = (
     baseId,
     tableName,
     records,
-    fieldValueMap = defaultMap,
+    fieldValueMap = config.fieldMap,
 ) => {
   // throw errors if records is not an array or if the array is empty or to big
   if (!(records instanceof Array)) throw Error('records must be an Array');
