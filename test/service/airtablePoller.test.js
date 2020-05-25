@@ -1,6 +1,6 @@
 'use strict';
 const sinon = require('sinon');
-const { expect } = require('chai');
+const {expect} = require('chai');
 const airtablePoller = require('../../src/service/airtablePoller');
 const config = require('../../src/config');
 const axios = require('axios');
@@ -11,20 +11,20 @@ describe('AirtablePoller', () => {
   describe('ChangeDetector dependancy', () => {
     it('Is initialiazed correctly', () => {
       expect(airtablePoller.airtableGatewayDetector.tableName).is
-        .equal(config.airtable.tableName);
+          .equal(config.airtable.tableName);
       expect(airtablePoller.airtableGatewayDetector.writeDelayMs).is.equal(100);
       expect(airtablePoller.airtableGatewayDetector.metaFieldName).is
-        .equal('Meta');
+          .equal('Meta');
       expect(airtablePoller.airtableGatewayDetector.lastModifiedFieldName).is
-        .equal('AirTable Gateway Last Modified');
+          .equal('AirTable Gateway Last Modified');
       expect(airtablePoller.airtableGatewayDetector.lastProcessedFieldName).is
-        .equal('Airtable Gateway Last Processed');
+          .equal('Airtable Gateway Last Processed');
     });
     describe('poll', () => {
       let stub;
       beforeEach(() => {
         stub = sinon.stub(
-          airtablePoller.airtableGatewayDetector, 'pollWithInterval',
+            airtablePoller.airtableGatewayDetector, 'pollWithInterval',
         );
       });
       afterEach(() => {
@@ -34,7 +34,7 @@ describe('AirtablePoller', () => {
         airtablePoller.poll();
         expect(stub.calledOnce).to.be.true;
         expect(stub.firstCall.args[0]).to
-          .equal(`Polling of ${config.airtable.tableName}`);
+            .equal(`Polling of ${config.airtable.tableName}`);
         expect(stub.firstCall.args[1]).to.equal(10000);
         expect(typeof stub.firstCall.args[2]).to.equal('function');
         expect(stub.firstCall.args[2].name).to.equal('processChangedRecords');
@@ -45,17 +45,17 @@ describe('AirtablePoller', () => {
       before(() => {
         config.statusMap.justCantArr = [
           'In Progress - We Can’t Take Responsibility for This Anymore',
-          'EMERGENCY - Has Urgent Needs to be filled; that we cannot!'
-        ]
+          'EMERGENCY - Has Urgent Needs to be filled; that we cannot!',
+        ];
         config.statusMap.completedArr = [
           'Resolved - Follow up next week',
           'Resolved - Able to Fill Need',
-          'Resolved - Cancelled'
-        ]
+          'Resolved - Cancelled',
+        ];
         config.statusMap.assignedArr = [
           'In Progress - Unable to contact',
-          'In Progress - We Take Responsibility For This'
-        ]
+          'In Progress - We Take Responsibility For This',
+        ];
       });
       beforeEach(() => {
         stub = sinon.stub(axios, 'post');
@@ -65,15 +65,15 @@ describe('AirtablePoller', () => {
       });
       it('Skips never before processed records', () => {
         examples.newRecord[0].getMeta = sinon.stub();
-        examples.newRecord[0].getMeta.returns({ lastValues: [] });
+        examples.newRecord[0].getMeta.returns({lastValues: []});
         airtablePoller.processChangedRecords(examples.newRecord);
         expect(stub.notCalled).to.be.true;
       });
       it('Handles multiple records', () => {
         examples.twoRecords[0].getMeta = sinon.stub();
-        examples.twoRecords[0].getMeta.returns({ lastValues: [1, 2] });
+        examples.twoRecords[0].getMeta.returns({lastValues: [1, 2]});
         examples.twoRecords[1].getMeta = sinon.stub();
-        examples.twoRecords[1].getMeta.returns({ lastValues: [1, 2] });
+        examples.twoRecords[1].getMeta.returns({lastValues: [1, 2]});
         airtablePoller.processChangedRecords(examples.twoRecords);
         expect(stub.calledTwice).to.be.true;
       });
@@ -151,14 +151,14 @@ describe('AirtablePoller', () => {
           expect(stub.firstCall.args[1]).to.eql(updateObj);
         });
         it('Handles status "In Progress - We Take Responsibility For This"',
-          () => {
-            updateObj.manyc.status = 'assigned';
-            examples.oneRecord[0].fields.Status =
+            () => {
+              updateObj.manyc.status = 'assigned';
+              examples.oneRecord[0].fields.Status =
               'In Progress - We Take Responsibility For This';
-            airtablePoller.processChangedRecords(examples.oneRecord);
-            expect(stub.firstCall.args[0]).to.equal(config.url.newReq);
-            expect(stub.firstCall.args[1]).to.eql(updateObj);
-          });
+              airtablePoller.processChangedRecords(examples.oneRecord);
+              expect(stub.firstCall.args[0]).to.equal(config.url.newReq);
+              expect(stub.firstCall.args[1]).to.eql(updateObj);
+            });
       });
     });
   });
