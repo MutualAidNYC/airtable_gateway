@@ -76,8 +76,12 @@
     "FIELD_MAP_SOURCE_ID": {
       "description": "Source ID field, unique id from the source"
     },
-    "STATUS_MAP_JUST_CANT_1": {
+    "STATUS_MAP_JUST_CANT_0": {
       "description": "Status that maps to `just can't`"
+    },
+    "STATUS_MAP_JUST_CANT_1": {
+      "description": "Optional additional status that maps to `just can't`",
+      "required": false
     },
     "STATUS_MAP_JUST_CANT_2": {
       "description": "Optional additional status that maps to `just can't`",
@@ -111,12 +115,12 @@
       "description": "Optional additional status that maps to `just can't`",
       "required": false
     },
-    "STATUS_MAP_JUST_CANT_10": {
-      "description": "Optional additional status that maps to `just can't`",
-      "required": false
+    "STATUS_MAP_COMPLETED_0": {
+      "description": "Status that maps to 'completed'"
     },
     "STATUS_MAP_COMPLETED_1": {
-      "description": "Status that maps to 'completed'"
+      "description": "Optional additional status that maps to 'completed'",
+      "required": false
     },
     "STATUS_MAP_COMPLETED_2": {
       "description": "Optional additional status that maps to 'completed'",
@@ -150,12 +154,12 @@
       "description": "Optional additional status that maps to 'completed'",
       "required": false
     },
-    "STATUS_MAP_COMPLETED_10": {
-      "description": "Optional additional status that maps to 'completed'",
-      "required": false
+    "STATUS_MAP_ASSIGNED_0": {
+      "description": "Status that maps to 'assigned'"
     },
     "STATUS_MAP_ASSIGNED_1": {
-      "description": "Status that maps to 'assigned'"
+      "description": "Optional additional status that maps to 'assigned'",
+      "required": false
     },
     "STATUS_MAP_ASSIGNED_2": {
       "description": "Optional additional status that maps to 'assigned'",
@@ -186,10 +190,6 @@
       "required": false
     },
     "STATUS_MAP_ASSIGNED_9": {
-      "description": "Optional additional status that maps to 'assigned'",
-      "required": false
-    },
-    "STATUS_MAP_ASSIGNED_10": {
       "description": "Optional additional status that maps to 'assigned'",
       "required": false
     }

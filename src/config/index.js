@@ -43,7 +43,7 @@ const config = {
 };
 
 // lets get up to 10 statuses for the status mapping
-for (let idx = 1; idx <= 10; idx++) {
+for (let idx = 0; idx < 10; idx++) {
   const justCantVar = `STATUS_MAP_JUST_CANT_${idx}`;
   if (process.env[justCantVar]) {
     config.statusMap.justCantArr.push(process.env[justCantVar]);
