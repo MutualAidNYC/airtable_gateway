@@ -14,11 +14,11 @@ describe('AirtablePoller', () => {
           .equal(config.airtable.tableName);
       expect(airtablePoller.airtableGatewayDetector.writeDelayMs).is.equal(100);
       expect(airtablePoller.airtableGatewayDetector.metaFieldName).is
-          .equal('Meta');
+          .equal(config.airtableChangeDetectorFields.meta);
       expect(airtablePoller.airtableGatewayDetector.lastModifiedFieldName).is
-          .equal('AirTable Gateway Last Modified');
+          .equal(config.airtableChangeDetectorFields.lastModifiedFieldName);
       expect(airtablePoller.airtableGatewayDetector.lastProcessedFieldName).is
-          .equal('Airtable Gateway Last Processed');
+          .equal(config.airtableChangeDetectorFields.lastProcessedFieldName);
     });
     describe('poll', () => {
       let stub;

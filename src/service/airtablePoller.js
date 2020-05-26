@@ -13,9 +13,9 @@ class AirtablePoller {
     this.airtableGatewayDetector = new ChangeDetector(
         base(config.airtable.tableName), {
           writeDelayMs: 100,
-          metaFieldName: 'Meta', // Defaults to `Meta`
-          lastModifiedFieldName: 'AirTable Gateway Last Modified',
-          lastProcessedFieldName: 'Airtable Gateway Last Processed',
+          metaFieldName: config.airtableChangeDetectorFields.meta,
+          lastModifiedFieldName: config.airtableChangeDetectorFields.lastModifiedFieldName, // eslint-disable-line max-len
+          lastProcessedFieldName: config.airtableChangeDetectorFields.lastProcessedFieldName, // eslint-disable-line max-len
         },
     );
   }

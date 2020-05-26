@@ -54,3 +54,6 @@ jobs:
           STATUS_MAP_COMPLETED_2: Resolved - Cancelled
           STATUS_MAP_ASSIGNED_0: In Progress- Unable to contact
           STATUS_MAP_ASSIGNED_1: In Progress - We Take Responsibility For This
+          POLL_FIELD_META: Meta
+          POLL_FIELD_LAST_MODIFIED: AirTable Gateway Last Modified
+          POLL_FIELD_LAST_PROCESSED: Airtable Gateway Last Processed

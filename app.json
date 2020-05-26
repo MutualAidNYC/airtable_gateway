@@ -192,6 +192,18 @@
     "STATUS_MAP_ASSIGNED_9": {
       "description": "Optional additional status that maps to 'assigned'",
       "required": false
+    },
+    "POLL_FIELD_META": {
+      "description": "Utility field needed by airtable gateway to track changes in field values",
+      "value": "Meta"
+    },
+    "POLL_FIELD_LAST_MODIFIED": {
+      "description": "Utility field needed by airtable gateway to know when the record was last modified",
+      "value": "AirTable Gateway Last Modified"
+    },
+    "POLL_FIELD_LAST_PROCESSED": {
+      "description": "Utility field needed by airtable gateway to determine when the record was last processed",
+      "value": "Airtable Gateway Last Processed"
     }
   },
   "stack": "heroku-18",

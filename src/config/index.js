@@ -39,6 +39,11 @@ const config = {
     completedArr: [],
     assignedArr: [],
   },
+  airtableChangeDetectorFields: {
+    meta: process.env.POLL_FIELD_META,
+    lastModifiedFieldName: process.env.POLL_FIELD_LAST_MODIFIED,
+    lastProcessedFieldName: process.env.POLL_FIELD_LAST_PROCESSED,
+  },
   port: process.env.PORT,
 };
 
