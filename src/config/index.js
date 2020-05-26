@@ -11,8 +11,8 @@ const config = {
     tableName: process.env.AIRTABLE_TABLE_NAME,
   },
   url: {
-    newReq: process.env.MANYC_NEW_REQ,
-    updateReq: process.env.MANYC_UPDATE_REQ,
+    newReq: process.env.MANYC_NEW_REQ_URL,
+    updateReq: process.env.MANYC_UPDATE_REQ_URL,
     deleteReq: process.env.MANYC_DELETE_REQ_URL,
   },
   fieldMap: {
