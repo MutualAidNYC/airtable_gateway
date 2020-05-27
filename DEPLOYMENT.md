@@ -2,21 +2,22 @@
 
 
 We at MANYC are presently only supporting [paid Heroku dynos](https://www.heroku.com/pricing).
-This project is an 'active' server that actively polls your airtable every 10 seconds. Unfortunately  the free Heroku tier won't let you poll for any period
-of time before the free Heroku dyno goes to [sleep](https://devcenter.heroku.com/articles/free-dyno-hours#dyno-sleeping)
+This project is an 'active' server that actively polls your airtable every 10 seconds. Unfortunately  the free Heroku tier won't let you poll for any period of time before the free Heroku dyno goes to [sleep](https://devcenter.heroku.com/articles/free-dyno-hours#dyno-sleeping)
 
 We hope in the future to have FULL deployment instructions on alternative platforms.
 
+Should you wish to **_test_** Airtable Gateway in a non-production scenario, follow the [Deploy to Heroku](#deploy-to-heroku) steps skipping the final steps (10-13) then follow the [additional steps](#additional-directions-for-a-non-production-free-dyno-to-test-with) after the main deployment instructions.
+
 ## Deploy to Heroku
 
-Follow the steps below, but here is a video, with _most_ (not all) of the steps if you get stuck: [How to deploy Airtable Gateway to Heroku](https://youtu.be/LHQ_xRf9Uc8)
+Follow the steps below, but here is a video, with covering the first 9 steps if you get stuck: [How to deploy Airtable Gateway to Heroku](https://youtu.be/LHQ_xRf9Uc8). After you watch, resume with step 10.
 
 1. Contact MANYC to obtain three pieces of information:
    1. MANYC New Request URL
    2. MANYC Update Request URL
    3. MANY Delete Request URL
 2. Add to your list of statuses a status 'Recalled' this will be used when MANYC triggers a cancel of a request.
-3. Click this button, and continue reading. Be aware that this will, when you submit the form, create a **PAID** Heroku dyno which is $7 a month (prorated) at the time this document was created.
+3. Click this button, and continue reading.
    [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 4. Give your app a unique Heroku name, the name itself doesn't have an effect.
 5. Choose the 'App Owner'
@@ -51,6 +52,29 @@ Follow the steps below, but here is a video, with _most_ (not all) of the steps 
          2. Assigned
          3. Completed
       3. There needs to be at least 1 status that matches each of the three generic statuses. If you have MORE than 10 status to map to a given status, contact MANYC and we'll provide further instructions.
-8. Click 'Deploy app.' Reminder this is creating a **PAID** Heroku dyno.
+8. Click `Deploy app.` Reminder this is creating a free Heroku dyno.
+9. When deployment is done, click `Manage App`
+10. Click `Resources` on top
+11. Click `Change Dyno Type`
+12. Choose `Hobby` dyno, our app doesn't need a more powerful system.
+13. You are all done!
 
+## Additional directions for a non-production free dyno to test with
 
+These instructions resume from step 9 of the deployment having clicked `Manage App`
+
+1. Click `Settings` on top
+2. In the 'Config Vars' section, click `Reveal Config Vars`
+3. Scroll down to the last revealed one
+   1. Set the key to: `FREE_HEROKU_DYNO`
+   2. Set the value to: `true`
+   3. Click `Add`
+4. Click `Resources` on top
+5. In the 'Add-ons' section use the search box to search for and click `Heroku Scheduler`
+6. After you've read the Terms of Service, click `Provision`
+7. In the 'Add-ons' section, a new link for `Heroku Scheduler` appeared, click it.
+8. In the new tab, click `Create job`
+9. Set the interval to every 10 minutes
+10. Set the run command to `node src/jobs/pollOnce.js`
+11. On bottom of the page, click `Save job`
+12. You are all done!
