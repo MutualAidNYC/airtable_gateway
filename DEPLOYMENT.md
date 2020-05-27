@@ -9,7 +9,7 @@ We hope in the future to have FULL deployment instructions on alternative platfo
 
 ## Deploy to Heroku
 
-Follow the steps below, but here is a video if you get stuck: [How to deploy Airtable Gateway to Heroku](https://youtu.be/LHQ_xRf9Uc8)
+Follow the steps below, but here is a video, with _most_ (not all) of the steps if you get stuck: [How to deploy Airtable Gateway to Heroku](https://youtu.be/LHQ_xRf9Uc8)
 
 1. Contact MANYC to obtain three pieces of information:
    1. MANYC New Request URL
