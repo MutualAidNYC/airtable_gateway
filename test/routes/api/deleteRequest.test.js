@@ -9,7 +9,7 @@ const recallNeedsRequestObj = require('../../../src/service/recallNeedsRequest')
 
 expressLoader(app);
 
-describe.only('POST /api/deleteRequest', async () => {
+describe('POST /api/deleteRequest', async () => {
   let stub;
   const deleteObj = {
     manyc: {
