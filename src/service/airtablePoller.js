@@ -7,16 +7,16 @@ const config = require('../config');
 
 class AirtablePoller {
   constructor() {
-    const base = new Airtable({ apiKey: config.airtable.key })
-      .base(config.airtable.baseId);
+    const base = new Airtable({apiKey: config.airtable.key})
+        .base(config.airtable.baseId);
 
     this.airtableGatewayDetector = new ChangeDetector(
-      base(config.airtable.tableName), {
-      writeDelayMs: 100,
-      metaFieldName: config.airtableChangeDetectorFields.meta,
-      lastModifiedFieldName: config.airtableChangeDetectorFields.lastModifiedFieldName, // eslint-disable-line max-len
-      lastProcessedFieldName: config.airtableChangeDetectorFields.lastProcessedFieldName, // eslint-disable-line max-len
-    },
+        base(config.airtable.tableName), {
+          writeDelayMs: 100,
+          metaFieldName: config.airtableChangeDetectorFields.meta,
+          lastModifiedFieldName: config.airtableChangeDetectorFields.lastModifiedFieldName, // eslint-disable-line max-len
+          lastProcessedFieldName: config.airtableChangeDetectorFields.lastProcessedFieldName, // eslint-disable-line max-len
+        },
     );
   }
 
@@ -56,14 +56,14 @@ class AirtablePoller {
 
   poll() {
     this.airtableGatewayDetector.pollWithInterval(
-      `Polling of ${config.airtable.tableName}`,
-      10000, // interval in milliseconds
-      this.processChangedRecords);
+        `Polling of ${config.airtable.tableName}`,
+        10000, // interval in milliseconds
+        this.processChangedRecords);
   }
 
   async pollOnce() {
-    const changedRecords = await this.airtableGatewayDetector.pollOnce()
-    this.processChangedRecords(changedRecords)
+    const changedRecords = await this.airtableGatewayDetector.pollOnce();
+    this.processChangedRecords(changedRecords);
   }
 }
 

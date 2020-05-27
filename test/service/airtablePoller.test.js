@@ -1,6 +1,6 @@
 'use strict';
 const sinon = require('sinon');
-const { expect } = require('chai');
+const {expect} = require('chai');
 const airtablePoller = require('../../src/service/airtablePoller');
 const config = require('../../src/config');
 const axios = require('axios');
@@ -11,20 +11,20 @@ describe('AirtablePoller', () => {
   describe('ChangeDetector dependency', () => {
     it('Is initialized correctly', () => {
       expect(airtablePoller.airtableGatewayDetector.tableName).is
-        .equal(config.airtable.tableName);
+          .equal(config.airtable.tableName);
       expect(airtablePoller.airtableGatewayDetector.writeDelayMs).is.equal(100);
       expect(airtablePoller.airtableGatewayDetector.metaFieldName).is
-        .equal(config.airtableChangeDetectorFields.meta);
+          .equal(config.airtableChangeDetectorFields.meta);
       expect(airtablePoller.airtableGatewayDetector.lastModifiedFieldName).is
-        .equal(config.airtableChangeDetectorFields.lastModifiedFieldName);
+          .equal(config.airtableChangeDetectorFields.lastModifiedFieldName);
       expect(airtablePoller.airtableGatewayDetector.lastProcessedFieldName).is
-        .equal(config.airtableChangeDetectorFields.lastProcessedFieldName);
+          .equal(config.airtableChangeDetectorFields.lastProcessedFieldName);
     });
     describe('poll', () => {
       let stub;
       beforeEach(() => {
         stub = sinon.stub(
-          airtablePoller.airtableGatewayDetector, 'pollWithInterval',
+            airtablePoller.airtableGatewayDetector, 'pollWithInterval',
         );
       });
       afterEach(() => {
@@ -34,7 +34,7 @@ describe('AirtablePoller', () => {
         airtablePoller.poll();
         expect(stub.calledOnce).to.be.true;
         expect(stub.firstCall.args[0]).to
-          .equal(`Polling of ${config.airtable.tableName}`);
+            .equal(`Polling of ${config.airtable.tableName}`);
         expect(stub.firstCall.args[1]).to.equal(10000);
         expect(typeof stub.firstCall.args[2]).to.equal('function');
         expect(stub.firstCall.args[2].name).to.equal('processChangedRecords');
@@ -65,15 +65,15 @@ describe('AirtablePoller', () => {
       });
       it('Skips never before processed records', () => {
         examples.newRecord[0].getMeta = sinon.stub();
-        examples.newRecord[0].getMeta.returns({ lastValues: [] });
+        examples.newRecord[0].getMeta.returns({lastValues: []});
         airtablePoller.processChangedRecords(examples.newRecord);
         expect(stub.notCalled).to.be.true;
       });
       it('Handles multiple records', () => {
         examples.twoRecords[0].getMeta = sinon.stub();
-        examples.twoRecords[0].getMeta.returns({ lastValues: [1, 2] });
+        examples.twoRecords[0].getMeta.returns({lastValues: [1, 2]});
         examples.twoRecords[1].getMeta = sinon.stub();
-        examples.twoRecords[1].getMeta.returns({ lastValues: [1, 2] });
+        examples.twoRecords[1].getMeta.returns({lastValues: [1, 2]});
         airtablePoller.processChangedRecords(examples.twoRecords);
         expect(stub.calledTwice).to.be.true;
       });
@@ -151,38 +151,38 @@ describe('AirtablePoller', () => {
           expect(stub.firstCall.args[1]).to.eql(updateObj);
         });
         it('Handles status "In Progress - We Take Responsibility For This"',
-          () => {
-            updateObj.manyc.status = 'assigned';
-            examples.oneRecord[0].fields.Status =
+            () => {
+              updateObj.manyc.status = 'assigned';
+              examples.oneRecord[0].fields.Status =
               'In Progress - We Take Responsibility For This';
-            airtablePoller.processChangedRecords(examples.oneRecord);
-            expect(stub.firstCall.args[0]).to.equal(config.url.newReq);
-            expect(stub.firstCall.args[1]).to.eql(updateObj);
-          });
+              airtablePoller.processChangedRecords(examples.oneRecord);
+              expect(stub.firstCall.args[0]).to.equal(config.url.newReq);
+              expect(stub.firstCall.args[1]).to.eql(updateObj);
+            });
       });
     });
     describe('pollOnce', () => {
-      let pollOnceStub, processChangedRecordsStub;
-      const fakeRecords = [{}, {}]
+      let pollOnceStub; let processChangedRecordsStub;
+      const fakeRecords = [{}, {}];
       beforeEach(() => {
         pollOnceStub = sinon.stub(
-          airtablePoller.airtableGatewayDetector,
-          'pollOnce'
+            airtablePoller.airtableGatewayDetector,
+            'pollOnce',
         );
         processChangedRecordsStub = sinon.stub(
-          airtablePoller,
-          'processChangedRecords'
-        )
+            airtablePoller,
+            'processChangedRecords',
+        );
       });
       afterEach(() => {
         pollOnceStub.restore();
         processChangedRecordsStub.restore();
       });
       it('triggers a single poll and processes the results', async () => {
-        pollOnceStub.resolves(fakeRecords)
-        await airtablePoller.pollOnce()
+        pollOnceStub.resolves(fakeRecords);
+        await airtablePoller.pollOnce();
         expect(processChangedRecordsStub.firstCall.firstArg)
-          .to.equal(fakeRecords)
+            .to.equal(fakeRecords);
       });
     });
   });

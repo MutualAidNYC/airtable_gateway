@@ -45,7 +45,7 @@ const config = {
     lastProcessedFieldName: process.env.POLL_FIELD_LAST_PROCESSED,
   },
   port: process.env.PORT,
-  isFreeHerokuDyno: process.env.FREE_HEROKU_DYNO === "true" ? true : false
+  isFreeHerokuDyno: process.env.FREE_HEROKU_DYNO === 'true' ? true : false,
 };
 
 // lets get up to 10 statuses for the status mapping
