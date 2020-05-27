@@ -14,7 +14,7 @@ const recallNeedsRequest = async (manycId) => {
   );
   const records = await firstPage();
   if (records.length !== 1) {
-    return new Error('Couldn\'t find exactly 1 record with the ID');
+    throw new Error('Couldn\'t find exactly 1 record with the ID');
   }
   // assume for now 1 record
   const airtableRecordId = records[0].getId();
