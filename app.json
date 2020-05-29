@@ -25,11 +25,11 @@
     },
     "MANYC_UPDATE_REQ_URL": {
       "description": "This will be provided to you by MANYC",
-      "required": true
+      "required": false
     },
     "MANYC_DELETE_REQ_URL": {
       "description": "This will be provided to you by MANYC",
-      "required": true
+      "required": false
     },
     "FIELD_MAP_STATUS": {
       "description": "Your status field",

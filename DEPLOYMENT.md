@@ -18,7 +18,7 @@ Follow the steps below, but here is a video, with covering the first 9 steps if 
    3. MANY Delete Request URL
 2. Add to your list of statuses a status 'Recalled' this will be used when MANYC triggers a cancel of a request.
 3. Click this button, and continue reading.
-   [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+   [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/MutualAidNYC/airtable_gateway)
 4. Give your app a unique Heroku name, the name itself doesn't have an effect.
 5. Choose the 'App Owner'
 6. For region, 'United States' is sufficient.
