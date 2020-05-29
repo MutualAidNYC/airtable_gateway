@@ -30,3 +30,30 @@ jobs:
           MANYC_UPDATE_REQ: REPLACE_ME
           MANYC_DELETE_REQ_URL: REPLACE_ME
           PORT: 8080
+          FIELD_MAP_STATUS: status
+          FIELD_MAP_ID: id
+          FIELD_MAP_SUPPORT_TYPE: supportType
+          FIELD_MAP_OTHER_SUPPORT: otherSupport
+          FIELD_MAP_COMMUNITY: community
+          FIELD_MAP_LANGUAGE: language
+          FIELD_MAP_LANGUAGE_OTHER: languageOther
+          FIELD_MAP_PHONE: phone
+          FIELD_MAP_EMAIL: email
+          FIELD_MAP_FULL_NAME: fullname
+          FIELD_MAP_URGENCY: urgency
+          FIELD_MAP_CONTACT_METHOD: contactMethod
+          FIELD_MAP_CROSS_STREET: crossStreet
+          FIELD_MAP_TIME_STAMP_CREATED: timeStampCreated
+          FIELD_MAP_TIME_STAMP_SENT: timeStampSent
+          FIELD_MAP_SOURCE: source
+          FIELD_MAP_SOURCE_ID: sourceID
+          STATUS_MAP_JUST_CANT_0: In Progress - We Can’t Take Responsibility for This Anymore
+          STATUS_MAP_JUST_CANT_1: EMERGENCY- Has Urgent Needs to be filled; that we cannot!
+          STATUS_MAP_COMPLETED_0: Resolved - Follow up next week
+          STATUS_MAP_COMPLETED_1: Resolved - Able to Fill Need
+          STATUS_MAP_COMPLETED_2: Resolved - Cancelled
+          STATUS_MAP_ASSIGNED_0: In Progress- Unable to contact
+          STATUS_MAP_ASSIGNED_1: In Progress - We Take Responsibility For This
+          POLL_FIELD_META: Meta
+          POLL_FIELD_LAST_MODIFIED: AirTable Gateway Last Modified
+          POLL_FIELD_LAST_PROCESSED: Airtable Gateway Last Processed

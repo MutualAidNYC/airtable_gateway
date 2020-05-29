@@ -136,6 +136,25 @@ describe('addAirtableRows', () => {
     },
   },
   ];
+  before(() => {
+    config.fieldMap.status = 'Status';
+    config.fieldMap.id = 'Unique ID';
+    config.fieldMap.supportType = 'What type(s) of support are you seeking?';
+    config.fieldMap.otherSupport = `If you're seeking other types of support, please describe.`; // eslint-disable-line max-len
+    config.fieldMap.community = 'Are you, or anyone in your household in one or more of these hardest-hit groups? Please select all that apply.'; // eslint-disable-line max-len
+    config.fieldMap.language = `Language Access: is your primary language something other than English, for which you'd need translation & interpretation support to connect to volunteers?`; // eslint-disable-line max-len
+    config.fieldMap.languageOther = 'Other language(s) spoken:';
+    config.fieldMap.phone = 'Cell';
+    config.fieldMap.email = 'Email';
+    config.fieldMap.fullName = 'Full Name';
+    config.fieldMap.urgency = 'How soon do you need support?';
+    config.fieldMap.contactMethod = 'Which of these ways are best to get in touch with you?'; // eslint-disable-line max-len
+    config.fieldMap.crossStreet = 'Cross Streets';
+    config.fieldMap.timestampCreated = 'timeStampCreated';
+    config.fieldMap.timestampSent = 'Dispatched Time';
+    config.fieldMap.source = 'source';
+    config.fieldMap.sourceID = 'sourceID';
+  });
   beforeEach(() => {
     createStub = sinon.stub();
     baseStub = sinon.stub(Airtable, 'base');

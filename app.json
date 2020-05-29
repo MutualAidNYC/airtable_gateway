@@ -1,0 +1,250 @@
+{
+  "name": "Airtable Gateway",
+  "description": "synchronizer of two Airtable tables.",
+  "keywords": [
+    "Airtable",
+    "JS"
+  ],
+  "repository": "https://github.com/MutualAidNYC/airtable_gatewayl",
+  "env": {
+    "AIRTABLE_KEY": {
+      "description": "An Airtable API key which can be obtained here: https://airtable.com/account",
+      "required": true
+    },
+    "AIRTABLE_BASE": {
+      "description": "The base ID of the base containing the table to be synced. watch this video on how to find: https://youtu.be/gGL0MWc-98Y",
+      "required": true
+    },
+    "AIRTABLE_TABLE_NAME": {
+      "description": "The table within the base to be synced",
+      "required": true
+    },
+    "MANYC_NEW_REQ_URL": {
+      "description": "This will be provided to you by MANYC",
+      "required": true
+    },
+    "MANYC_UPDATE_REQ_URL": {
+      "description": "This will be provided to you by MANYC",
+      "required": true
+    },
+    "MANYC_DELETE_REQ_URL": {
+      "description": "This will be provided to you by MANYC",
+      "required": true
+    },
+    "FIELD_MAP_STATUS": {
+      "description": "Your status field",
+      "required": true
+    },
+    "FIELD_MAP_ID": {
+      "description": "A field to store MANYC's ID",
+      "required": true
+    },
+    "FIELD_MAP_SUPPORT_TYPE": {
+      "description": "Support type field",
+      "required": true
+    },
+    "FIELD_MAP_OTHER_SUPPORT": {
+      "description": "Other support field",
+      "required": true
+    },
+    "FIELD_MAP_COMMUNITY": {
+      "description": "Community field",
+      "required": true
+    },
+    "FIELD_MAP_LANGUAGE": {
+      "description": "Language field",
+      "required": true
+    },
+    "FIELD_MAP_LANGUAGE_OTHER": {
+      "description": "Other language field",
+      "required": true
+    },
+    "FIELD_MAP_PHONE": {
+      "description": "Phone number field",
+      "required": true
+    },
+    "FIELD_MAP_EMAIL": {
+      "description": "Email field",
+      "required": true
+    },
+    "FIELD_MAP_FULL_NAME": {
+      "description": "Full Name field",
+      "required": true
+    },
+    "FIELD_MAP_URGENCY": {
+      "description": "Urgency field",
+      "required": true
+    },
+    "FIELD_MAP_CONTACT_METHOD": {
+      "description": "Contact Method field",
+      "required": true
+    },
+    "FIELD_MAP_CROSS_STREET": {
+      "description": "Cross street field",
+      "required": true
+    },
+    "FIELD_MAP_TIME_STAMP_CREATED": {
+      "description": "Time stamp created field",
+      "required": true
+    },
+    "FIELD_MAP_TIME_STAMP_SENT": {
+      "description": "Time stamp sent field",
+      "required": true
+    },
+    "FIELD_MAP_SOURCE": {
+      "description": "Source field, the source of the needs request",
+      "required": true
+    },
+    "FIELD_MAP_SOURCE_ID": {
+      "description": "Source ID field, unique id from the source",
+      "required": true
+    },
+    "STATUS_MAP_JUST_CANT_0": {
+      "description": "Status that maps to `just can't`",
+      "required": true
+    },
+    "STATUS_MAP_JUST_CANT_1": {
+      "description": "Optional additional status that maps to `just can't`",
+      "required": false
+    },
+    "STATUS_MAP_JUST_CANT_2": {
+      "description": "Optional additional status that maps to `just can't`",
+      "required": false
+    },
+    "STATUS_MAP_JUST_CANT_3": {
+      "description": "Optional additional status that maps to `just can't`",
+      "required": false
+    },
+    "STATUS_MAP_JUST_CANT_4": {
+      "description": "Optional additional status that maps to `just can't`",
+      "required": false
+    },
+    "STATUS_MAP_JUST_CANT_5": {
+      "description": "Optional additional status that maps to `just can't`",
+      "required": false
+    },
+    "STATUS_MAP_JUST_CANT_6": {
+      "description": "Optional additional status that maps to `just can't`",
+      "required": false
+    },
+    "STATUS_MAP_JUST_CANT_7": {
+      "description": "Optional additional status that maps to `just can't`",
+      "required": false
+    },
+    "STATUS_MAP_JUST_CANT_8": {
+      "description": "Optional additional status that maps to `just can't`",
+      "required": false
+    },
+    "STATUS_MAP_JUST_CANT_9": {
+      "description": "Optional additional status that maps to `just can't`",
+      "required": false
+    },
+    "STATUS_MAP_COMPLETED_0": {
+      "description": "Status that maps to 'completed'",
+      "required": true
+    },
+    "STATUS_MAP_COMPLETED_1": {
+      "description": "Optional additional status that maps to 'completed'",
+      "required": false
+    },
+    "STATUS_MAP_COMPLETED_2": {
+      "description": "Optional additional status that maps to 'completed'",
+      "required": false
+    },
+    "STATUS_MAP_COMPLETED_3": {
+      "description": "Optional additional status that maps to 'completed'",
+      "required": false
+    },
+    "STATUS_MAP_COMPLETED_4": {
+      "description": "Optional additional status that maps to 'completed'",
+      "required": false
+    },
+    "STATUS_MAP_COMPLETED_5": {
+      "description": "Optional additional status that maps to 'completed'",
+      "required": false
+    },
+    "STATUS_MAP_COMPLETED_6": {
+      "description": "Optional additional status that maps to 'completed'",
+      "required": false
+    },
+    "STATUS_MAP_COMPLETED_7": {
+      "description": "Optional additional status that maps to 'completed'",
+      "required": false
+    },
+    "STATUS_MAP_COMPLETED_8": {
+      "description": "Optional additional status that maps to 'completed'",
+      "required": false
+    },
+    "STATUS_MAP_COMPLETED_9": {
+      "description": "Optional additional status that maps to 'completed'",
+      "required": false
+    },
+    "STATUS_MAP_ASSIGNED_0": {
+      "description": "Status that maps to 'assigned'",
+      "required": true
+    },
+    "STATUS_MAP_ASSIGNED_1": {
+      "description": "Optional additional status that maps to 'assigned'",
+      "required": false
+    },
+    "STATUS_MAP_ASSIGNED_2": {
+      "description": "Optional additional status that maps to 'assigned'",
+      "required": false
+    },
+    "STATUS_MAP_ASSIGNED_3": {
+      "description": "Optional additional status that maps to 'assigned'",
+      "required": false
+    },
+    "STATUS_MAP_ASSIGNED_4": {
+      "description": "Optional additional status that maps to 'assigned'",
+      "required": false
+    },
+    "STATUS_MAP_ASSIGNED_5": {
+      "description": "Optional additional status that maps to 'assigned'",
+      "required": false
+    },
+    "STATUS_MAP_ASSIGNED_6": {
+      "description": "Optional additional status that maps to 'assigned'",
+      "required": false
+    },
+    "STATUS_MAP_ASSIGNED_7": {
+      "description": "Optional additional status that maps to 'assigned'",
+      "required": false
+    },
+    "STATUS_MAP_ASSIGNED_8": {
+      "description": "Optional additional status that maps to 'assigned'",
+      "required": false
+    },
+    "STATUS_MAP_ASSIGNED_9": {
+      "description": "Optional additional status that maps to 'assigned'",
+      "required": false
+    },
+    "POLL_FIELD_META": {
+      "description": "Utility field needed by airtable gateway to track changes in field values",
+      "value": "Meta",
+      "required": true
+    },
+    "POLL_FIELD_LAST_MODIFIED": {
+      "description": "Utility field needed by airtable gateway to know when the record was last modified",
+      "value": "AirTable Gateway Last Modified",
+      "required": true
+    },
+    "POLL_FIELD_LAST_PROCESSED": {
+      "description": "Utility field needed by airtable gateway to determine when the record was last processed",
+      "value": "Airtable Gateway Last Processed",
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "stack": "heroku-18",
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}

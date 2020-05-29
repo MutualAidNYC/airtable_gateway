@@ -8,17 +8,17 @@ const examples = require('./airtablePoller.examples');
 
 
 describe('AirtablePoller', () => {
-  describe('ChangeDetector dependancy', () => {
-    it('Is initialiazed correctly', () => {
+  describe('ChangeDetector dependency', () => {
+    it('Is initialized correctly', () => {
       expect(airtablePoller.airtableGatewayDetector.tableName).is
           .equal(config.airtable.tableName);
       expect(airtablePoller.airtableGatewayDetector.writeDelayMs).is.equal(100);
       expect(airtablePoller.airtableGatewayDetector.metaFieldName).is
-          .equal('Meta');
+          .equal(config.airtableChangeDetectorFields.meta);
       expect(airtablePoller.airtableGatewayDetector.lastModifiedFieldName).is
-          .equal('AirTable Gateway Last Modified');
+          .equal(config.airtableChangeDetectorFields.lastModifiedFieldName);
       expect(airtablePoller.airtableGatewayDetector.lastProcessedFieldName).is
-          .equal('Airtable Gateway Last Processed');
+          .equal(config.airtableChangeDetectorFields.lastProcessedFieldName);
     });
     describe('poll', () => {
       let stub;
@@ -42,13 +42,28 @@ describe('AirtablePoller', () => {
     });
     describe('processChangedRecords', () => {
       let stub;
+      before(() => {
+        config.statusMap.justCantArr = [
+          'In Progress - We Can’t Take Responsibility for This Anymore',
+          'EMERGENCY - Has Urgent Needs to be filled; that we cannot!',
+        ];
+        config.statusMap.completedArr = [
+          'Resolved - Follow up next week',
+          'Resolved - Able to Fill Need',
+          'Resolved - Cancelled',
+        ];
+        config.statusMap.assignedArr = [
+          'In Progress - Unable to contact',
+          'In Progress - We Take Responsibility For This',
+        ];
+      });
       beforeEach(() => {
         stub = sinon.stub(axios, 'post');
       });
       afterEach(() => {
         stub.restore();
       });
-      it('Skips mever before processed records', () => {
+      it('Skips never before processed records', () => {
         examples.newRecord[0].getMeta = sinon.stub();
         examples.newRecord[0].getMeta.returns({lastValues: []});
         airtablePoller.processChangedRecords(examples.newRecord);
@@ -63,7 +78,7 @@ describe('AirtablePoller', () => {
         expect(stub.calledTwice).to.be.true;
       });
       // eslint-disable-next-line max-len
-      describe('Categorizes statuses and sends a \'Groups Update MANYC record\'', () => {
+      describe(`Categorizes statuses and sends a 'Groups Update MANYC record'`, () => {
         const updateObj = {
           manyc: {
             status: undefined,
@@ -100,7 +115,7 @@ describe('AirtablePoller', () => {
         it('Handles status "EMERGENCY- Has Urgent Needs to be filled; that we cannot!"', () => {
           updateObj.manyc.status = 'justCant';
           examples.oneRecord[0].fields.Status =
-            'EMERGENCY- Has Urgent Needs to be filled; that we cannot!';
+            'EMERGENCY - Has Urgent Needs to be filled; that we cannot!';
           airtablePoller.processChangedRecords(examples.oneRecord);
           expect(stub.firstCall.args[0]).to.equal(config.url.newReq);
           expect(stub.firstCall.args[1]).to.eql(updateObj);
@@ -130,7 +145,7 @@ describe('AirtablePoller', () => {
         it('Handles status "In Progress- Unable to contact"', () => {
           updateObj.manyc.status = 'assigned';
           examples.oneRecord[0].fields.Status =
-            'In Progress- Unable to contact';
+            'In Progress - Unable to contact';
           airtablePoller.processChangedRecords(examples.oneRecord);
           expect(stub.firstCall.args[0]).to.equal(config.url.newReq);
           expect(stub.firstCall.args[1]).to.eql(updateObj);
@@ -144,6 +159,30 @@ describe('AirtablePoller', () => {
               expect(stub.firstCall.args[0]).to.equal(config.url.newReq);
               expect(stub.firstCall.args[1]).to.eql(updateObj);
             });
+      });
+    });
+    describe('pollOnce', () => {
+      let pollOnceStub; let processChangedRecordsStub;
+      const fakeRecords = [{}, {}];
+      beforeEach(() => {
+        pollOnceStub = sinon.stub(
+            airtablePoller.airtableGatewayDetector,
+            'pollOnce',
+        );
+        processChangedRecordsStub = sinon.stub(
+            airtablePoller,
+            'processChangedRecords',
+        );
+      });
+      afterEach(() => {
+        pollOnceStub.restore();
+        processChangedRecordsStub.restore();
+      });
+      it('triggers a single poll and processes the results', async () => {
+        pollOnceStub.resolves(fakeRecords);
+        await airtablePoller.pollOnce();
+        expect(processChangedRecordsStub.firstCall.firstArg)
+            .to.equal(fakeRecords);
       });
     });
   });
