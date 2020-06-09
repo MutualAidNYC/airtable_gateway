@@ -8,8 +8,8 @@ module.exports = (app) => {
     try {
       await recallNeedsRequestObj.recallNeedsRequest(newRequest.manyc.id);
     } catch (error) {
-      // fail silently!
+      console.log('error: ', error);
     }
-    res.send('Request deleted');
+    res.send('Request Deleted');
   });
 };
