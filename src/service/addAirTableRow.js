@@ -25,7 +25,6 @@ const transformObjects = (records, fieldToValueMap) => {
         const fieldName = fieldToValueMap[key]; // get the field name
         if (record.manyc[key] !== undefined) {
           // if the field exists in the provided record
-
           // add the value to the proper property in Airtable's record
           tranformedRecord.fields[fieldName] = record.manyc[key];
         }
