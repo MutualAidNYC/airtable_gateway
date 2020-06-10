@@ -27,7 +27,7 @@ class AirtablePoller {
       if (Object.keys(record.getMeta().lastValues).length === 0) return;
 
       let status;
-      const recordStatus = records.fields[config.fieldMap.status];
+      const recordStatus = record.fields[config.fieldMap.status];
       if (config.statusMap.justCantArr.includes(recordStatus)) {
         status = 'justCant';
       } else if (config.statusMap.completedArr.includes(recordStatus)) {

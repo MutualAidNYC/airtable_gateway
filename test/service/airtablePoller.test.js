@@ -6,7 +6,6 @@ const config = require('../../src/config');
 const axios = require('axios');
 const examples = require('./airtablePoller.examples');
 
-
 describe('AirtablePoller', () => {
   describe('ChangeDetector dependency', () => {
     it('Is initialized correctly', () => {
