@@ -13,25 +13,28 @@ const transformObjects = (records, fieldToValueMap) => {
   const transformedRecords = [];
 
   records.forEach((record) => {
-    // for every provided record
-
-    // create a new default airtable object
-    const tranformedRecord = {fields: {}};
-
-    for (const key in fieldToValueMap) {
-      // for every key in the fieldToValueMap Object
-      if (fieldToValueMap.hasOwnProperty(key)) {
-        // if its not an inherited property
-        const fieldName = fieldToValueMap[key]; // get the field name
-        if (record.manyc[key] !== undefined) {
-          // if the field exists in the provided record
-          // add the value to the proper property in Airtable's record
-          tranformedRecord.fields[fieldName] = record.manyc[key];
+    if (record.hasOwnProperty('manyc')) {
+      // create a new default airtable object
+      const tranformedRecord = {fields: {}};
+      for (const key in fieldToValueMap) {
+        // for every key in the fieldToValueMap Object
+        if (fieldToValueMap.hasOwnProperty(key) &&
+        fieldToValueMap[key] !== undefined) {
+          // if its not an inherited property
+          const fieldName = fieldToValueMap[key]; // get the field name
+          if (record.manyc.hasOwnProperty(key) &&
+          record.manyc[key] !== undefined) {
+            // if the field exists in the provided record
+            // add the value to the proper property in Airtable's record
+            tranformedRecord.fields[fieldName] = record.manyc[key];
+          }
         }
       }
+      // add the completed record to the return array
+      transformedRecords.push(tranformedRecord);
+    } else {
+      console.log('Incorrect MANYC Record Format. Row Cannot Be Added');
     }
-    // add the completed record to the return array
-    transformedRecords.push(tranformedRecord);
   });
   return transformedRecords;
 };
