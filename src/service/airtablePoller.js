@@ -35,7 +35,7 @@ class AirtablePoller {
       } else if (config.statusMap.assignedArr.includes(recordStatus)) {
         status = 'assigned';
       } else {
-        console.log('No Correlated Status Mapping, Ignoring Change...');
+        console.log(`No Status Mapping for '${recordStatus}', Ignoring Change...`);
         return;
       }
 
