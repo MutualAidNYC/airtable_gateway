@@ -35,7 +35,9 @@ class AirtablePoller {
       } else if (config.statusMap.assignedArr.includes(recordStatus)) {
         status = 'assigned';
       } else {
-        console.log(`No Status Mapping for '${recordStatus}', Ignoring Change...`);
+        console.log(
+            `No Status Mapping for '${recordStatus}', Ignoring Change...`,
+        );
         return;
       }
 
@@ -43,7 +45,9 @@ class AirtablePoller {
       if (record.fields[config.fieldMap.id]) {
         manycId = record.fields[config.fieldMap.id];
       } else {
-        console.log('No Correlated ID Mapping, Ignoring Change...');
+        console.log(
+            'No ID Mapping for AirTable, Cannot Process Record(s), Exiting...',
+        );
         return;
       }
 
@@ -61,7 +65,7 @@ class AirtablePoller {
     Promise.all(promises);
     if (numChanges > 0) {
       console.log(
-          `Successfully Sent ${numChanges} New/Updated Request(s) to MANYC`,
+          `Successfully Sent ${numChanges} Updated Request(s) to MANYC`,
       );
     }
     return;
