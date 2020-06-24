@@ -21,6 +21,7 @@ class AirtablePoller {
 
   async processChangedRecords(recordsChanged) {
     const numChanges = recordsChanged.length;
+    let changesCount = 0;
     console.info(`Found ${numChanges} changes in ${config.airtable.tableName}`);
     const promises = [];
     recordsChanged.forEach((record) => {
@@ -59,16 +60,17 @@ class AirtablePoller {
           notes: record.fields['Notes'] || null, // optional
         },
       }));
+      changesCount += 1;
     });
 
     // If doing many Airtable writes, be careful of 5rps rate limit
     Promise.all(promises);
-    if (numChanges > 0) {
+    if (changesCount > 0) {
       console.log(
-          `Successfully Sent ${numChanges} Updated Request(s) to MANYC`,
+          `Successfully Sent ${changesCount} Updated Request(s) to MANYC`,
       );
     }
-    return;
+    return changesCount;
   }
 
   poll() {

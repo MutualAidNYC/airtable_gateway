@@ -128,5 +128,16 @@ module.exports = {
       },
     },
   ],
+  requiredRecord: {
+    id: 'recxxxxxxxxxxx',
+    fields: {
+      'Unique ID': 985,
+      'Status': 'In Progress - We Take Responsibility For This',
+    },
+  },
+  emptyRecord: {
+    id: 'recxxxxxxxxxxx',
+    fields: {},
+  },
 };
 /* eslint-enable max-len */
