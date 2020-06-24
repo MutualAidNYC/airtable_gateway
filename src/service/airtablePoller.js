@@ -70,7 +70,7 @@ class AirtablePoller {
           `Successfully Sent ${changesCount} Updated Request(s) to MANYC`,
       );
     }
-    return changesCount;
+    return;
   }
 
   poll() {
