@@ -206,5 +206,30 @@ describe('addAirtableRows', () => {
       expect(createStub.firstCall.args[0]).to.eql(result2);
       expect(typeof createStub.firstCall.args[1]).to.equal('function');
     });
+    it('Can add row with only required fields', () => {
+      expect(addAirtableRows(
+          config.airtable.key,
+          config.airtable.baseId,
+          config.airtable.tableName,
+          [{
+            manyc: {
+              status: 1,
+              id: 2,
+            },
+          }],
+          mapping,
+        )).to.be.instanceOf(Promise);
+        expect(createStub.firstCall.args[0]).to.eql([ { fields: { '1': 1, '2': 2 } } ])
+    });
+    it('Does not add row without manyc format', () => {
+      expect(addAirtableRows(
+          config.airtable.key,
+          config.airtable.baseId,
+          config.airtable.tableName,
+          [{}],
+          mapping,
+        )).to.be.instanceOf(Promise);
+        expect(createStub.firstCall.args[0]).to.eql([])
+    });
   });
 });

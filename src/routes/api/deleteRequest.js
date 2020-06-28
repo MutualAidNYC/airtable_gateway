@@ -10,6 +10,6 @@ module.exports = (app) => {
     } catch (error) {
       // fail silently!
     }
-    res.send('Request deleted');
+    res.send('Request Deleted');
   });
 };

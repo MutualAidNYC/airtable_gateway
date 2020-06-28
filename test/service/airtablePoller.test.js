@@ -6,7 +6,6 @@ const config = require('../../src/config');
 const axios = require('axios');
 const examples = require('./airtablePoller.examples');
 
-
 describe('AirtablePoller', () => {
   describe('ChangeDetector dependency', () => {
     it('Is initialized correctly', () => {
@@ -159,6 +158,24 @@ describe('AirtablePoller', () => {
               expect(stub.firstCall.args[0]).to.equal(config.url.newReq);
               expect(stub.firstCall.args[1]).to.eql(updateObj);
             });
+      });
+      describe(`Handles Required vs Optional Fields`, () => {
+        beforeEach(() => {
+          examples.requiredRecord.getMeta = sinon.stub().returns({
+            lastValues: [1],
+          });
+          examples.emptyRecord.getMeta = sinon.stub().returns({
+            lastValues: [1],
+          });
+        });
+        it('Sends record with only required fields', () => {
+          airtablePoller.processChangedRecords([examples.requiredRecord]);
+          expect(stub.calledOnce).to.be.true;
+        });
+        it('Does not send record without required fields', () => {
+          airtablePoller.processChangedRecords([examples.emptyRecord]);
+          expect(stub.notCalled).to.be.true;
+        });
       });
     });
     describe('pollOnce', () => {

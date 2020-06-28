@@ -5,7 +5,7 @@
     "Airtable",
     "JS"
   ],
-  "repository": "https://github.com/MutualAidNYC/airtable_gatewayl",
+  "repository": "https://github.com/MutualAidNYC/airtable_gateway",
   "env": {
     "AIRTABLE_KEY": {
       "description": "An Airtable API key which can be obtained here: https://airtable.com/account",
@@ -41,63 +41,63 @@
     },
     "FIELD_MAP_SUPPORT_TYPE": {
       "description": "Support type field",
-      "required": true
+      "required": false 
     },
     "FIELD_MAP_OTHER_SUPPORT": {
       "description": "Other support field",
-      "required": true
+      "required": false
     },
     "FIELD_MAP_COMMUNITY": {
       "description": "Community field",
-      "required": true
+      "required": false
     },
     "FIELD_MAP_LANGUAGE": {
       "description": "Language field",
-      "required": true
+      "required": false
     },
     "FIELD_MAP_LANGUAGE_OTHER": {
       "description": "Other language field",
-      "required": true
+      "required": false
     },
     "FIELD_MAP_PHONE": {
       "description": "Phone number field",
-      "required": true
+      "required": false
     },
     "FIELD_MAP_EMAIL": {
       "description": "Email field",
-      "required": true
+      "required": false
     },
     "FIELD_MAP_FULL_NAME": {
       "description": "Full Name field",
-      "required": true
+      "required": false
     },
     "FIELD_MAP_URGENCY": {
       "description": "Urgency field",
-      "required": true
+      "required": false
     },
     "FIELD_MAP_CONTACT_METHOD": {
       "description": "Contact Method field",
-      "required": true
+      "required": false 
     },
     "FIELD_MAP_CROSS_STREET": {
       "description": "Cross street field",
-      "required": true
+      "required": false
     },
     "FIELD_MAP_TIME_STAMP_CREATED": {
       "description": "Time stamp created field",
-      "required": true
+      "required": false
     },
     "FIELD_MAP_TIME_STAMP_SENT": {
       "description": "Time stamp sent field",
-      "required": true
+      "required": false
     },
     "FIELD_MAP_SOURCE": {
       "description": "Source field, the source of the needs request",
-      "required": true
+      "required": false
     },
     "FIELD_MAP_SOURCE_ID": {
       "description": "Source ID field, unique id from the source",
-      "required": true
+      "required": false
     },
     "STATUS_MAP_JUST_CANT_0": {
       "description": "Status that maps to `just can't`",

@@ -32,7 +32,7 @@ describe('POST /api/deleteRequest', async () => {
     expect(res.status).to.equal(200);
     expect(res.body).to.eql({});
     expect(res.type).to.equal('text/html');
-    expect(res.text).to.equal('Request deleted');
+    expect(res.text).to.equal('Request Deleted');
   });
   it('Fails silently', async () => {
     stub.throws('error');
@@ -43,6 +43,6 @@ describe('POST /api/deleteRequest', async () => {
     expect(res.status).to.equal(200);
     expect(res.body).to.eql({});
     expect(res.type).to.equal('text/html');
-    expect(res.text).to.equal('Request deleted');
+    expect(res.text).to.equal('Request Deleted');
   });
 });
