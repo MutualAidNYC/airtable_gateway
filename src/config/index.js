@@ -15,6 +15,10 @@ const config = {
     updateReq: process.env.MANYC_UPDATE_REQ_URL,
     deleteReq: process.env.MANYC_DELETE_REQ_URL,
   },
+  emailSender: {
+    username: process.env.EMAIL_USERNAME,
+    password: process.env.EMAIL_PASSWORD,
+  },
   fieldMap: {
     status: process.env.FIELD_MAP_STATUS,
     id: process.env.FIELD_MAP_ID,
